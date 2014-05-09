@@ -10,6 +10,7 @@ define ['backbone','text!templates/app.html'], (Backbone, appTemplate) ->
 
     render: ->
       @$el.html @template
+      return this
 
 
   appView = new AppView()

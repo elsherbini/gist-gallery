@@ -19,7 +19,7 @@ requirejs.config
 
 
 require ['app/vendors'], ->
-  require ['app/app','app/collections/gists'], (App, GistsCollection) ->
+  require ['app/app','app/collections/gists','app/views/usersGists'], (App, GistsCollection, UserGistsView) ->
     App.initialize()
 
     testCollection = new GistsCollection
@@ -30,4 +30,7 @@ require ['app/vendors'], ->
 
       error: (collection, response, options) ->
         console.log "error:", response
-      })  
+      })
+
+    myView = new UserGistsView({collection: testCollection})
+    console.log myView.collection
