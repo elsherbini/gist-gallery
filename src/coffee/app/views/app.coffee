@@ -1,4 +1,4 @@
-define ['backbone'], (Backbone) ->
+define ['backbone','text!templates/app.html'], (Backbone, appTemplate) ->
 
   class AppView extends Backbone.View
 
@@ -6,6 +6,10 @@ define ['backbone'], (Backbone) ->
 
     events: {}
 
-    initialize: ->
+    template: _.template(appTemplate)
+
+    render: ->
+      @$el.html @template
+
 
   appView = new AppView()

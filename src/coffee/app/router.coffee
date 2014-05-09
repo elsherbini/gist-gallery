@@ -1,16 +1,16 @@
-define ['backbone', 'app/views/app'], (Backbone, appView) ->
+define ['backbone', 'app/views/app'], (Backbone, AppView) ->
 
   class Router extends Backbone.Router
+
+    initialize: ->
+      AppView.render();
+      Backbone.history.start()
 
     routes:
       ':userName/:gistId(/)': 'singleGistRequested'
       ':userName(/)': 'usersGistsRequested'
 
-    initialize: ->
-      Backbone.history.start()
 
-    defaultAction: (actions) ->
-      console.log "Unhandled route #{actions}"
 
     singleGistRequested: (userName, gistId)->
       console.log "requested gist #{userName}/#{gistId}" 
