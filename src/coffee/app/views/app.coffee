@@ -7,6 +7,5 @@ define ['backbone'], (Backbone) ->
     events: {}
 
     initialize: ->
-      console.log("AppView initialized")
 
   appView = new AppView()
