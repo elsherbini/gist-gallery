@@ -1,3 +1,11 @@
 <div class="row">
-  <h2><%= 7%></h2>
+  <h2><%= gists[0].owner.login %></h2>
+</div>
+<div class="row">
+  <% _.each(gists, function(gist) { %>
+    <div class="col-lg-3 col-sm-4 col-xs-6">
+        <a href="#" class="gist thumbnail" style="background-image: url('http://placehold.it/350x150'">
+        </a>
+    </div>
+  <% }); %>
 </div>

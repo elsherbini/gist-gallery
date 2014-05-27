@@ -2,6 +2,7 @@ define [
   "backbone"
   ], (Backbone) ->
     class Gist extends Backbone.Model
+
       defaults:
         id: null
         owner: {login: ""}
@@ -10,6 +11,7 @@ define [
         updated_at: ""
         history: [{version: ""}]
         files: {}
+        
       parse: (data) ->
         id: data.id
         owner: {login: data.owner.login}

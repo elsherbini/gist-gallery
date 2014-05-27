@@ -21,16 +21,5 @@ requirejs.config
 require ['app/vendors'], ->
   require ['app/app','app/collections/gists','app/views/usersGists'], (App, GistsCollection, UserGistsView) ->
     App.initialize()
-
-    testCollection = new GistsCollection
-  
-    testCollection.fetch({
-      success: (collection, response, options) ->
-        console.log "collection:", collection, "response:", response
-
-      error: (collection, response, options) ->
-        console.log "error:", response
-      })
-
-    myView = new UserGistsView({collection: testCollection})
-    console.log myView.collection
+    myView = new UserGistsView()
+    myView.render()
