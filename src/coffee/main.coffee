@@ -21,5 +21,3 @@ requirejs.config
 require ['app/vendors'], ->
   require ['app/app','app/collections/gists','app/views/usersGists'], (App, GistsCollection, UserGistsView) ->
     App.initialize()
-    myView = new UserGistsView()
-    myView.render()

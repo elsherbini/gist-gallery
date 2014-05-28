@@ -8,8 +8,7 @@ define ['backbone','app/collections/gists','text!templates/usersGists.html'], (B
 
     template: _.template(UsersGistsTemplate)
 
-    initialize: ->
-      @collection = new GistCollection
+    initialize: (models, options)->
 
       @collection.fetch({
       success: (collection, response, options) ->

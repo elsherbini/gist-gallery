@@ -7,6 +7,9 @@ define [
 
       model: GistModel
 
+      initialize: (models, options) ->
+        @url = options.url
+
       sync: (method, model, options) ->
         options.timeout = 8000
         options.dataType = 'jsonp'
@@ -14,6 +17,3 @@ define [
       
       parse: (response) ->
         response.data
-
-
-      url: "https://api.github.com/users/mbostock/gists"
