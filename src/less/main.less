@@ -1,4 +1,28 @@
 a.gist {
     min-width: 20%;
-    min-height: 150px;
+    min-height: 80px;
+    transition: background-position 750ms ease 0s;
+}
+
+a.gist:hover,
+a.gist:focus {
+  background-color: #eee;
+  background-position: 50% 100%;
+  text-decoration: none;
+}
+
+a.gist .description {
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
+}
+
+a.gist .description {
+  top: 0;
+  color: #000;
+  text-shadow: 1px 1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, -1px -1px 0 #FFFFFF;
+}
+
+a.gist:hover .description {
+  text-decoration: underline;
 }
