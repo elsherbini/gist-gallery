@@ -19,5 +19,5 @@ requirejs.config
 
 
 require ['app/vendors'], ->
-  require ['app/app','app/collections/gists','app/views/usersGists'], (App, GistsCollection, UserGistsView) ->
+  require ['app/app'], (App) ->
     App.initialize()
