@@ -8,7 +8,8 @@ define [
       model: GistModel
 
       initialize: (models, options) ->
-        @url = options.url
+        options or options = {}
+        @url = options.url?
 
       sync: (method, model, options) ->
         options.timeout = 8000

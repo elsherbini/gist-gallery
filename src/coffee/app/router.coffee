@@ -2,9 +2,9 @@ define [
   'backbone'
   'app/views/app'
   'app/collections/gists'
-  'app/views/usersGists'
+  'app/views/gists'
   'app/collections/users'
-  'app/views/orgUsers'], (Backbone, AppView, GistsCollection, UserGistsView, UsersCollection, OrgUsersView) ->
+  'app/views/users'], (Backbone, AppView, GistsCollection, GistsView, UsersCollection, UsersView) ->
 
   class Router extends Backbone.Router
 
@@ -13,6 +13,7 @@ define [
       Backbone.history.start()
 
     routes:
+      '': 'rootRequested'
       'orgs/:orgName': 'orgsGistsRequested'
       ':userName/:gistId(/)': 'singleGistRequested'
       ':userName(/)': 'usersGistsRequested'
@@ -26,5 +27,36 @@ define [
       new UserGistsView({collection: new GistsCollection([],{url: "https://api.github.com/users/#{userName}/gists"})}).render()
 
     orgsGistsRequested: (orgName)->
-      console.log "requested users in #{orgName}"
-      new OrgUsersView({collection: new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"})}).render()
+
+      userCollection = new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"})
+      userCollection.fetch({
+          success: (collection, response, options) =>
+            console.log "successfully fetched #{userCollection.url}"
+            console.log JSON.stringify userCollection.toJSON()
+            @getGistsForUsers(userCollection)
+
+          error: (collection, response, options) ->
+            console.log "error:", response
+        })
+
+    getGistsForUsers: (userCollection)->
+      gistsCollection = new GistsCollection
+      window.gistsCollection= gistsCollection
+      gistsView = new GistsView({collection: gistsCollection})
+      
+      for user in userCollection.toJSON()
+        gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
+        gistsCollection.fetch({
+          success: (collection, response, options) ->
+            console.log "successfully fetched #{user.login}'s gists"
+            console.log JSON.stringify gistsCollection.toJSON()
+
+          error: (collection, response, options) ->
+            console.log "error:", response
+        }, {
+          add: true
+          remove: false
+          })
+
+    rootRequested: ->
+      @orgsGistsRequested "d3"
