@@ -32,7 +32,6 @@ define [
       userCollection.fetch({
           success: (collection, response, options) =>
             console.log "successfully fetched #{userCollection.url}"
-            console.log JSON.stringify userCollection.toJSON()
             @getGistsForUsers(userCollection)
 
           error: (collection, response, options) ->
@@ -40,23 +39,27 @@ define [
         })
 
     getGistsForUsers: (userCollection)->
+
       gistsCollection = new GistsCollection
-      window.gistsCollection= gistsCollection
+
       gistsView = new GistsView({collection: gistsCollection})
-      
+
       for user in userCollection.toJSON()
         gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
         gistsCollection.fetch({
+          
+          add: true
+          
+          remove: false
+
           success: (collection, response, options) ->
             console.log "successfully fetched #{user.login}'s gists"
             console.log JSON.stringify gistsCollection.toJSON()
 
           error: (collection, response, options) ->
             console.log "error:", response
-        }, {
-          add: true
-          remove: false
-          })
+        })
 
     rootRequested: ->
-      @orgsGistsRequested "d3"
+      @orgsGistsRequested("d3")
+      
