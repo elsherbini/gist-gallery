@@ -4,4 +4,6 @@ define [
   'backbone'
   'text'
   'bootstrap'
+  'highlightjs'
+  'showdown'
 ], ->

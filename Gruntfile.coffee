@@ -36,6 +36,7 @@ module.exports = (grunt) ->
         files: [
             '<%= app.tmp %>/css/bootstrap.css' : '<%= app.app %>/components/bootstrap/less/{bootstrap,responsive}.less'
             '<%= app.tmp %>/css/main.css' : '<%= app.src %>/less/*.less'
+            '<%= app.tmp %>/css/tomorrow.css': '<%= app.src %>/less/tomorrow.css'
         ]
 
     connect:
@@ -63,7 +64,7 @@ module.exports = (grunt) ->
         tasks: ['coffee:dist']
 
       less:
-        files: ['components/bootstrap/less/{bootstrap,responsive}.less']
+        files: ['components/bootstrap/less/{bootstrap,responsive}.less','<%= app.src %>/less/*.{less,css}']
         tasks: 'less:dist'
 
       files:

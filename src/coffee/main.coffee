@@ -8,6 +8,10 @@ requirejs.config
       exports: 'Backbone'
     'bootstrap':
       deps: ['jquery']
+    'highlightjs':
+      exports: 'hljs'
+    'showdown':
+      exports: 'Showdown'
 
   paths:
     'underscore': '../components/underscore/underscore'
@@ -15,6 +19,8 @@ requirejs.config
     'jquery': '../components/jquery/dist/jquery'
     'bootstrap': '../components/bootstrap/dist/js/bootstrap'
     'text': '../components/requirejs-text/text'
+    'highlightjs': '../components/highlightjs/highlight.pack'
+    'showdown': '../components/showdown/compressed/showdown'
     'templates': '../templates'
 
 
