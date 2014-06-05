@@ -1,0 +1,9 @@
+<div class="row">
+  <% _.each(gist.files, function(file) { %>
+    <pre>
+      <code>
+        <%- file.content%>
+      </code>
+    </pre>
+  <% }); %>
+</div>

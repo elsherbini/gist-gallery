@@ -2,9 +2,11 @@ define [
   'backbone'
   'app/views/app'
   'app/collections/gists'
+  'app/models/gist'
   'app/views/gists'
+  'app/views/gist'
   'app/collections/users'
-  'app/views/users'], (Backbone, AppView, GistsCollection, GistsView, UsersCollection, UsersView) ->
+  'app/views/users'], (Backbone, AppView, GistsCollection, GistModel, GistsView, GistView, UsersCollection, UsersView) ->
 
   class Router extends Backbone.Router
 
@@ -19,8 +21,17 @@ define [
       ':userName(/)': 'usersGistsRequested'
 
 
-    singleGistRequested: (userName, gistId)->
-      console.log "requested gist #{userName}/#{gistId}" 
+    singleGistRequested: (gistId)->
+      gistModel = new GistModel()
+      gistView = new GistView({model: gistModel})
+      gistModel.url = "https://api.github.com/gists/#{gistId}"
+      gistModel.fetch({
+        success: (model, response, options) =>
+          console.log "successfully fetched gist #{gistId}"
+        error: (model, response, options) ->
+          console.log "error:", response
+        })
+
 
     usersGistsRequested: (userName)->
       console.log "requested gists of #{userName}"
@@ -61,5 +72,6 @@ define [
         })
 
     rootRequested: ->
-      @orgsGistsRequested("d3")
+     @singleGistRequested("d7bf3bd67d00ed79695b")
+     #@orgsGistsRequested("d3")
       
