@@ -4,7 +4,7 @@
 <div class="row">
   <% _.each(gists, function(gist) { %>
     <div class="col-lg-2 col-sm-4 col-xs-6">
-        <a href="#/<%=gist.owner.login%>/<%=gist.id%>" class="gist thumbnail"
+        <a href="#/<%=gist.id%>" class="gist thumbnail"
         <% if (gist.files.hasOwnProperty("thumbnail.png")){ %>
           style="background-image: url(<%= gist.files["thumbnail.png"].raw_url %>"
         <% } %>

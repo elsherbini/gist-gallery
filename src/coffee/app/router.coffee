@@ -17,8 +17,7 @@ define [
     routes:
       '': 'rootRequested'
       'orgs/:orgName': 'orgsGistsRequested'
-      ':userName/:gistId(/)': 'singleGistRequested'
-      ':userName(/)': 'usersGistsRequested'
+      ':gistId(/)': 'singleGistRequested'
 
 
     singleGistRequested: (gistId)->
@@ -32,10 +31,6 @@ define [
           console.log "error:", response
         })
 
-
-    usersGistsRequested: (userName)->
-      console.log "requested gists of #{userName}"
-      new UserGistsView({collection: new GistsCollection([],{url: "https://api.github.com/users/#{userName}/gists"})}).render()
 
     orgsGistsRequested: (orgName)->
 
@@ -65,13 +60,12 @@ define [
 
           success: (collection, response, options) ->
             console.log "successfully fetched #{user.login}'s gists"
-            console.log JSON.stringify gistsCollection.toJSON()
 
           error: (collection, response, options) ->
             console.log "error:", response
         })
 
     rootRequested: ->
-     @singleGistRequested("d7bf3bd67d00ed79695b")
-     #@orgsGistsRequested("d3")
+     #@singleGistRequested("d7bf3bd67d00ed79695b")
+     @orgsGistsRequested("d3")
       
