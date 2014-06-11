@@ -19,9 +19,8 @@ define [
       'orgs/:orgName': 'orgsGistsRequested'
       ':gistId(/)': 'singleGistRequested'
 
-
     singleGistRequested: (gistId)->
-      gistModel = new GistModel()
+      @gistModel = gistModel = new GistModel()
       gistView = new GistView({model: gistModel})
       gistModel.url = "https://api.github.com/gists/#{gistId}"
       gistModel.fetch({
@@ -34,23 +33,24 @@ define [
 
     orgsGistsRequested: (orgName)->
 
-      userCollection = new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"})
-      userCollection.fetch({
+      usersCollection = new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"})
+      usersCollection.fetch({
           success: (collection, response, options) =>
-            console.log "successfully fetched #{userCollection.url}"
-            @getGistsForUsers(userCollection)
+            console.log "successfully fetched #{usersCollection.url}"
+            @getGistsForUsers(usersCollection, orgName)
 
           error: (collection, response, options) ->
             console.log "error:", response
         })
 
-    getGistsForUsers: (userCollection)->
+    getGistsForUsers: (usersCollection, orgName)->
 
       gistsCollection = new GistsCollection
+      gistsCollection.org = orgName
 
       gistsView = new GistsView({collection: gistsCollection})
 
-      for user in userCollection.toJSON()
+      for user in usersCollection.toJSON()
         gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
         gistsCollection.fetch({
           

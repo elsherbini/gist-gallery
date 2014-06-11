@@ -15,6 +15,7 @@ define [
       initialize: (models, options) ->
         options or options = {}
         @url = options.url?
+        @org = options.org?
 
       #jsonp allows loading of json from other servers, in this case github
       sync: (method, model, options) ->

@@ -1,9 +1,18 @@
+<h1><%=gist.description%></h1>
+<iframe id="example" scrolling="no" marginheight="0" marginwidth="0" src=<%="http://bl.ocks.org/"+gist.owner.login+"/raw/"+gist.id%>></iframe>
 <div class="row">
   <% _.each(gist.files, function(file) { %>
-    <pre>
-      <code>
-        <%- file.content%>
-      </code>
-    </pre>
+    <% if (file.filename === "README.md") {%>
+      <div><%= new Showdown.converter().makeHtml(file.content)%></div>
+    <% } else if (!(file.type === "image/png" || file.type === "image/jpeg")) { %>
+      <h3>
+        <%-file.filename %>
+      </h3>
+      <pre>
+        <code>
+          <%-file.content%>
+        </code>
+      </pre>
+    <% } %>
   <% }); %>
 </div>
