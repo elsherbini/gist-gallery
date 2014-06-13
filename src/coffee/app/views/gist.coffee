@@ -10,8 +10,6 @@ define ['backbone','highlightjs','app/collections/gists','text!templates/gist.ht
 
     initialize: (model, options)->
       @listenTo(@model, 'sync', @render)
-      options or options = {}
-      @org = options.org?
 
     render: ->
       myHtml = $.parseHTML(@template {gist: @model.toJSON()})

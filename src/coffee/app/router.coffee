@@ -45,21 +45,28 @@ define [
 
     getGistsForUsers: (usersCollection, orgName)->
 
-      gistsCollection = new GistsCollection
+      window.gistsCollection = gistsCollection = new GistsCollection
       gistsCollection.org = orgName
 
-      gistsView = new GistsView({collection: gistsCollection})
+      window.gistsView = gistsView = new GistsView({collection: gistsCollection})
 
       for user in usersCollection.toJSON()
+
         gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
-        gistsCollection.fetch({
+        
+        gistsCollection.refreshFromServer({
           
+          url: gistsCollection.url
+
           add: true
+
+          merge: true
           
           remove: false
 
           success: (collection, response, options) ->
-            console.log "successfully fetched #{user.login}'s gists"
+            console.log "successfully fetched some gists"
+            #gistsCollection.each( (model) -> model.save())
 
           error: (collection, response, options) ->
             console.log "error:", response

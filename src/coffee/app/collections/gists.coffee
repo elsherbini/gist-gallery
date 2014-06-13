@@ -1,11 +1,14 @@
 define [
   "backbone"
   "app/models/gist"
+  "localstorage"
 ], (Backbone, GistModel) ->
 
     class Gists extends Backbone.Collection
 
       model: GistModel
+
+      localstorage: new Backbone.LocalStorage("LoadedGists")
 
       #sort gists by the the decending update time (more recent first)
       comparator: (gist) ->
@@ -18,10 +21,11 @@ define [
         @org = options.org?
 
       #jsonp allows loading of json from other servers, in this case github
-      sync: (method, model, options) ->
+
+      refreshFromServer : (options) ->
         options.timeout = 8000
         options.dataType = 'jsonp'
-        return Backbone.sync(method, model, options)
-      
+        return Backbone.ajaxSync("read", @, options)
+           
       parse: (response) ->
         response.data

@@ -16,6 +16,7 @@ requirejs.config
   paths:
     'underscore': '../components/underscore/underscore'
     'backbone': '../components/backbone/backbone'
+    'localstorage':'../components/backbone.localstorage/backbone.localStorage'
     'jquery': '../components/jquery/dist/jquery'
     'bootstrap': '../components/bootstrap/dist/js/bootstrap'
     'text': '../components/requirejs-text/text'

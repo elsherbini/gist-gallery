@@ -6,4 +6,5 @@ define [
   'bootstrap'
   'highlightjs'
   'showdown'
+  'localstorage'
 ], ->
