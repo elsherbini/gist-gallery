@@ -11,6 +11,9 @@ define ['backbone','app/collections/users','text!templates/users.html'], (Backbo
     initialize: (models, options)->
 
       @collection.fetch({
+
+      cache: true 
+      
       success: (collection, response, options) ->
         console.log "success"
 

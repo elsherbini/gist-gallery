@@ -24,6 +24,7 @@ define [
       gistView = new GistView({model: gistModel})
       gistModel.url = "https://api.github.com/gists/#{gistId}"
       gistModel.fetch({
+        cache: true
         success: (model, response, options) =>
           console.log "successfully fetched gist #{gistId}"
         error: (model, response, options) ->
@@ -45,24 +46,23 @@ define [
 
     getGistsForUsers: (usersCollection, orgName)->
 
-      window.gistsCollection = gistsCollection = new GistsCollection
+      gistsCollection = new GistsCollection
       gistsCollection.org = orgName
 
-      window.gistsView = gistsView = new GistsView({collection: gistsCollection})
+      gistsView = new GistsView({collection: gistsCollection})
 
       for user in usersCollection.toJSON()
 
         gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
         
-        gistsCollection.refreshFromServer({
+        gistsCollection.fetch({
+
+          cache: true
+          add: true
+          merge: true
+          remove: false
           
           url: gistsCollection.url
-
-          add: true
-
-          merge: true
-          
-          remove: false
 
           success: (collection, response, options) ->
             console.log "successfully fetched some gists"

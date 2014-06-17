@@ -12,11 +12,13 @@ requirejs.config
       exports: 'hljs'
     'showdown':
       exports: 'Showdown'
+    'backbone-fetch-cache':
+      deps: ['backbone','underscore']
 
   paths:
     'underscore': '../components/underscore/underscore'
     'backbone': '../components/backbone/backbone'
-    'localstorage':'../components/backbone.localstorage/backbone.localStorage'
+    'backbone-fetch-cache': '../components/backbone-fetch-cache/backbone.fetch-cache'
     'jquery': '../components/jquery/dist/jquery'
     'bootstrap': '../components/bootstrap/dist/js/bootstrap'
     'text': '../components/requirejs-text/text'
