@@ -48,10 +48,11 @@ define [
 
       gistsCollection = new GistsCollection
       gistsCollection.org = orgName
+      gistsCollection.users = usersCollection.toJSON()
 
       gistsView = new GistsView({collection: gistsCollection})
 
-      for user in usersCollection.toJSON()
+      for user in gistsCollection.users
 
         gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
         

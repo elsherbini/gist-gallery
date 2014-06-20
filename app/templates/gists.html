@@ -1,9 +1,9 @@
 <div class="row">
   <h2><%= org%>'s gists</h2>
 </div>
-<div class="row">
+<div class="row col-lg-9">
   <% _.each(gists, function(gist) { %>
-    <div class="col-lg-2 col-sm-4 col-xs-6">
+    <div class="col-lg-3 col-sm-4 col-xs-6">
         <a href="#/<%=gist.id%>" class="gist thumbnail"
         <% if (gist.files.hasOwnProperty("thumbnail.png")){ %>
           style="background-image: url(<%= gist.files["thumbnail.png"].raw_url %>"
@@ -13,4 +13,19 @@
         </a>
     </div>
   <% }); %>
-</div>
+  </div>
+
+
+
+  <div class="row col-lg-3">
+    <% _.each(users, function(user) { %>
+      <div class="row">
+        <div class="col-lg-4">
+          <img class= "img-responsive img-circle" src="<%= user.avatar_url %>" />
+        </div>
+        <div class="col-lg-8">
+          <%= user.login %>
+        </div>
+      </div>
+    <% }); %>
+  </div>

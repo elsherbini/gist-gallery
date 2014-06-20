@@ -4,7 +4,7 @@
   <% _.each(gist.files, function(file) { %>
     <% if (file.filename === "README.md") {%>
       <div><%= new Showdown.converter().makeHtml(file.content)%></div>
-    <% } else if (!(file.type === "image/png" || file.type === "image/jpeg")) { %>
+    <% } else if (!(file.type === "image/png" || file.type === "image/jpeg" || file.size > 25000)) { %>
       <h3>
         <%-file.filename %>
       </h3>
