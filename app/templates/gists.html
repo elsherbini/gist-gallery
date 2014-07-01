@@ -19,7 +19,7 @@
 
   <div class="row col-lg-3">
     <% _.each(users, function(user) { %>
-      <div class="row">
+      <div class="row user" id="<%=user.login%>">
         <div class="col-lg-4">
           <img class= "img-responsive img-circle" src="<%= user.avatar_url %>" />
         </div>
@@ -28,4 +28,7 @@
         </div>
       </div>
     <% }); %>
+    <div class="row" id="resetFilters">
+    <p> reset filters </p>
+    </div>
   </div>
