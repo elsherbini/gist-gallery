@@ -11,10 +11,11 @@ define [
         updated_at: ""
         history: [{version: ""}]
         files: {}
+        languages: []
 
       initialize: ->
         @listenTo(@, 'sync', @sortFiles)
-        
+
       parse: (data) ->
         data = data.data if data.hasOwnProperty("data") #lol
         #but really though, when you request a single gist, it lives in res.data, whereas the list just lives in res
@@ -25,6 +26,7 @@ define [
         updated_at: data.updated_at
         history: data.history
         files: data.files
+        languages: (info.language for own file,info of data.files when info.language?)
 
       sync: (method, model, options) ->
         options.timeout = 8000
@@ -33,8 +35,8 @@ define [
 
       sortFiles: (->)
         ###sortedFiles = @.get("files").sort((a,b) ->
-         (b.filename == "index.html") - (a.filename == "index.html") || a.filename.localeCompare(b.filename) 
+         (b.filename == "index.html") - (a.filename == "index.html") || a.filename.localeCompare(b.filename)
         )
         @.set("files") = sortedFiles;###
-        
+
 

@@ -18,17 +18,29 @@
 
 
   <div class="row col-lg-3">
+    <div class="row" id="resetFilters">
+      <a href="#"> reset filters </a>
+    </div>
+    <div class="row filter-category">Filter by User</div>
     <% _.each(users, function(user) { %>
-      <div class="row user" id="<%=user.login%>">
+      <div class="row user filter" id="<%=user.login%>">
         <div class="col-lg-4">
           <img class= "img-responsive img-circle" src="<%= user.avatar_url %>" />
         </div>
-        <div class="col-lg-8">
-          <%= user.login %>
+        <div class="col-lg-8 vcenter">
+          <p><%= user.login %></p>
         </div>
       </div>
     <% }); %>
-    <div class="row" id="resetFilters">
-    <p> reset filters </p>
-    </div>
+    <div class="row filter-category">Filter by Language</div>
+    <% _.each(languages, function(language) { %>
+      <div class="row language filter" id="<%=language%>">
+        <div class="col-lg-4">
+          <img class= "img-responsive img-rounded lang-logo" src="assets/small-<%=language%>.png" />
+        </div>
+        <div class="col-lg-8 vcenter">
+          <p><%= language %></p>
+        </div>
+      </div>
+    <% }); %>
   </div>

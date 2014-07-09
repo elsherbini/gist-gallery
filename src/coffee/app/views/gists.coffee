@@ -16,8 +16,7 @@ define ['backbone','app/collections/gists','text!templates/gists.html'], (Backbo
       @listenTo(@collection, 'sync', @saveCollection)
 
     render: ->
-      console.log("i rendered?")
-      myHtml = @template {gists: @collection.toJSON(), org: @collection.org || "", users: @collection.users}
+      myHtml = @template {gists: @collection.toJSON(), org: @collection.org || "", users: @collection.users, languages: @collection.languages}
       @$el.html myHtml
       return this
 

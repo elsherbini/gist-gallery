@@ -55,18 +55,18 @@ define [
       for user in gistsCollection.users
 
         gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
-        
+
         gistsCollection.fetch({
 
           cache: true
           add: true
           merge: true
           remove: false
-          
+
           url: gistsCollection.url
 
           success: (collection, response, options) ->
-            console.log "successfully fetched some gists"
+            gistsCollection.setLanguages()
             #gistsCollection.each( (model) -> model.save())
 
           error: (collection, response, options) ->
@@ -76,4 +76,4 @@ define [
     rootRequested: ->
      #@singleGistRequested("d7bf3bd67d00ed79695b")
      @orgsGistsRequested("d3")
-      
+
