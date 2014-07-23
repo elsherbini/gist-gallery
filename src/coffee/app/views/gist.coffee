@@ -12,7 +12,8 @@ define ['backbone','highlightjs','app/collections/gists','text!templates/gist.ht
       @listenTo(@model, 'sync', @render)
 
     render: ->
-      myHtml = $.parseHTML(@template {gist: @model.toJSON()})
-      myHtml = $(myHtml).select('pre code').each((i,e)-> hljs.highlightBlock e )
-      @$el.html myHtml
+      window.$el = @$el
+      @$el.html @template {gist: @model.toJSON()}
+      $('pre code').each (i, block) ->
+        hljs.highlightBlock(block)
       return this
