@@ -1,7 +1,9 @@
 define [
   "backbone"
   "app/models/gist"
-], (Backbone, GistModel) ->
+  "app/models/language"
+  "app/collections/languages"
+], (Backbone, GistModel, LanguageModel, LanguagesCollection) ->
 
     class Gists extends Backbone.Collection
 
@@ -16,7 +18,7 @@ define [
         options or options = {}
         @url = options.url?
         @org = options.org?
-        @languages = []
+        @languages = new LanguagesCollection()
 
       #jsonp allows loading of json from other servers, in this case github
 
@@ -24,15 +26,13 @@ define [
         options || options = {}
         options.timeout = 8000
         options.dataType = 'jsonp'
-
+        options.validate = true
         return Backbone.sync(method, model, options)
 
       parse: (response) ->
-        response.data
+        (gist for gist in response.data when gist.files.hasOwnProperty("_include") is true)
 
-      setLanguages: ()->
+      setLanguages: ->
         for gist in @toJSON()
           for language in gist.languages
-            @languages.push language if language not in @languages and language isnt "Markdown"
-        console.log @languages
-
+            @languages.push new LanguageModel({name:language}) if not @languages.findWhere({name:language})? and language isnt "Markdown"

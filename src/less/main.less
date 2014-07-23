@@ -1,3 +1,22 @@
+body, pre {
+  font-size: medium;
+  background-color: #FFFFFF;
+}
+
+pre, code, textarea {
+  font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+  line-height: normal;
+}
+
+pre{
+    margin: 2em 0 2em -0;
+}
+
+html {
+  font-size: 100%;
+}
+
+
 a.gist {
     min-width: 20%;
     min-height: 80px;
@@ -46,11 +65,14 @@ iframe{
 }
 
 .filter {
-  margin-bottom: 1px;
+margin-bottom: 5px;
+margin-top: 5px;
+padding-left: 0px;
+padding-right: 0px;
 }
 
-.lang-logo {
-  min-height: 65px;
+.filter-text {
+  padding-top: 5px
 }
 
 #resetFilters {
@@ -59,6 +81,19 @@ iframe{
 
 .vcenter {
     display: inline;
-    vertical-align: middle !important;
+    vertical-align: middle;
     float: none;
+}
+.vbottom {
+    display: inline;
+    vertical-align: bottom;
+    float: none;
+}
+.faded {
+  opacity: 0.45;
+}
+
+.readme {
+  margin: 10px;
+  font-size: large;
 }

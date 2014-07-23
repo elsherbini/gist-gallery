@@ -1,5 +1,5 @@
 define ["backbone"], (Backbone) ->
-  class Gist extends Backbone.Model
+  class User extends Backbone.Model
 
     defaults:
       login: ""
@@ -9,7 +9,7 @@ define ["backbone"], (Backbone) ->
       url: ""
       html_url: ""
       gists_url: ""
-      
+
     parse: (data) ->
       login: data.login
       id: data.id

@@ -3,7 +3,7 @@ define [
   "app/models/user"
 ], (Backbone, UserModel) ->
 
-    class Gists extends Backbone.Collection
+    class Users extends Backbone.Collection
 
       model: UserModel
 
@@ -14,6 +14,6 @@ define [
         options.timeout = 8000
         options.dataType = 'jsonp'
         return Backbone.sync(method, model, options)
-      
+
       parse: (response) ->
         response.data
