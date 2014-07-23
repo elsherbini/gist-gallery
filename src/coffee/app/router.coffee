@@ -11,7 +11,8 @@ define [
 
     clientId = "REDACTED"
     clientSecret = "REDACTED"
-    addend = ""# "?client_id=#{clientId}&client_secret=#{clientSecret}"
+
+    addend = ""#"?client_id=#{clientId}&client_secret=#{clientSecret}"
 
     initialize: ->
       AppView.render();
@@ -40,16 +41,19 @@ define [
     orgsGistsRequested: (orgName)->
 
       usersCollection = new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"+addend})
-      usersCollection.fetch({
 
-          expires: 24*60*60
+      usersCollection.fetch(
 
-          success: (collection, response, options) =>
-            @getGistsForUsers(usersCollection, orgName)
+        cache: true
+        expires: 24*60*60
 
-          error: (collection, response, options) ->
-            console.log "error:", response
-        })
+        success: (collection, response, options) =>
+          @getGistsForUsers(usersCollection, orgName)
+
+        error: (collection, response, options) ->
+          console.log "error:", response
+      )
+
 
     getGistsForUsers: (usersCollection, orgName)->
 
