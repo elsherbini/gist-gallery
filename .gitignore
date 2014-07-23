@@ -4,3 +4,4 @@ dist/
 .tmp/
 npm-debug.log
 app/assets/dev
+secret
