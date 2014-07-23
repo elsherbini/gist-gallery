@@ -5,10 +5,13 @@ define [
   'app/models/gist'
   'app/views/gists'
   'app/views/gist'
-  'app/collections/users'
-  'app/views/users'], (Backbone, AppView, GistsCollection, GistModel, GistsView, GistView, UsersCollection, UsersView) ->
+  'app/collections/users'], (Backbone, AppView, GistsCollection, GistModel, GistsView, GistView, UsersCollection) ->
 
   class Router extends Backbone.Router
+
+    clientId = "REDACTED"
+    clientSecret = "REDACTED"
+    addend = ""# "?client_id=#{clientId}&client_secret=#{clientSecret}"
 
     initialize: ->
       AppView.render();
@@ -17,16 +20,18 @@ define [
     routes:
       '': 'rootRequested'
       'orgs/:orgName': 'orgsGistsRequested'
-      ':gistId(/)': 'singleGistRequested'
+      ':gistId(/)(:gistDescription)': 'singleGistRequested'
 
     singleGistRequested: (gistId)->
       @gistModel = gistModel = new GistModel()
       gistView = new GistView({model: gistModel})
-      gistModel.url = "https://api.github.com/gists/#{gistId}"
+      gistModel.url = "https://api.github.com/gists/#{gistId}"+addend
       gistModel.fetch({
         cache: true
+        expires: 24*60*60
+
         success: (model, response, options) =>
-          console.log "successfully fetched gist #{gistId}"
+          return
         error: (model, response, options) ->
           console.log "error:", response
         })
@@ -34,10 +39,12 @@ define [
 
     orgsGistsRequested: (orgName)->
 
-      usersCollection = new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"})
+      usersCollection = new UsersCollection([],{url: "https://api.github.com/orgs/#{orgName}/members"+addend})
       usersCollection.fetch({
+
+          expires: 24*60*60
+
           success: (collection, response, options) =>
-            console.log "successfully fetched #{usersCollection.url}"
             @getGistsForUsers(usersCollection, orgName)
 
           error: (collection, response, options) ->
@@ -48,13 +55,13 @@ define [
 
       gistsCollection = new GistsCollection
       gistsCollection.org = orgName
-      gistsCollection.users = usersCollection.toJSON()
+      gistsCollection.users = usersCollection
 
       gistsView = new GistsView({collection: gistsCollection})
 
-      for user in gistsCollection.users
+      for user in gistsCollection.users.toJSON()
 
-        gistsCollection.url = user.gists_url.match(/[^{]+/)[0] #get rid of the {/gistid} in the url
+        gistsCollection.url = user.gists_url.match(/[^{]+/)[0]+addend #get rid of the {/gistid} in the url
 
         gistsCollection.fetch({
 
@@ -62,12 +69,12 @@ define [
           add: true
           merge: true
           remove: false
+          expires: 24*60*60
 
           url: gistsCollection.url
 
           success: (collection, response, options) ->
             gistsCollection.setLanguages()
-            #gistsCollection.each( (model) -> model.save())
 
           error: (collection, response, options) ->
             console.log "error:", response
@@ -75,5 +82,5 @@ define [
 
     rootRequested: ->
      #@singleGistRequested("d7bf3bd67d00ed79695b")
-     @orgsGistsRequested("d3")
+     @orgsGistsRequested(App.state.org)
 
