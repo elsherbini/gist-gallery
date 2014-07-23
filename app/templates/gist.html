@@ -1,12 +1,18 @@
-<h1><%=gist.description%></h1>
+<div class="row">
+  <h1><%=gist.description%></h1>
+</div>
+
 <% if (gist.files.hasOwnProperty("index.html")){ %>
 <iframe id="example" scrolling="no" marginheight="0" marginwidth="0" src=<%="http://bl.ocks.org/"+gist.owner.login+"/raw/"+gist.id%>></iframe>
 <% } %>
+
 <% if (gist.files.hasOwnProperty("output.png")) { %>
+<div class="row">
 <img class="img-responsive" src="<%=gist.files["output.png"].raw_url%>">
+</div>
 <% } %>
 <div class="row">
-  <% _.each(gist.files, function(file) { %>
+  <% _.each(files, function(file) { %>
     <% if (file.filename === "README.md") {%>
       <div class="readme"><%= new Showdown.converter().makeHtml(file.content)%></div>
     <% } else if (!(file.type === "image/png" || file.type === "image/jpeg" || file.size > 25000 || file.filename[0] === "_")) { %>
