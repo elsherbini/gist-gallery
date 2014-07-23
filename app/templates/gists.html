@@ -1,46 +1,20 @@
-<div class="row">
-  <h2><%= org%>'s gists</h2>
+
+<div class= "row">
+  <h2><%= org%>'s snippets</h2>
 </div>
-<div class="row col-lg-9">
-  <% _.each(gists, function(gist) { %>
-    <div class="col-lg-3 col-sm-4 col-xs-6">
-        <a href="#/<%=gist.id%>" class="gist thumbnail"
-        <% if (gist.files.hasOwnProperty("thumbnail.png")){ %>
-          style="background-image: url(<%= gist.files["thumbnail.png"].raw_url %>"
-        <% } %>
-        >
-          <span class="description"><%=gist.description%></span>
-        </a>
-    </div>
-  <% }); %>
+
+
+<div class="row col-lg-9 gistThumbs">
+</div>
+
+<div class="row col-lg-3 ">
+  <a class="invisible" id="resetFilters" href="#"><p class="text-center"> reset filters </p></a>
+  <div class="panel panel-default">
+    <div class="panel-heading">Filter by User</div>
+    <div class="panel-body users"></div>
   </div>
-
-
-
-  <div class="row col-lg-3">
-    <div class="row" id="resetFilters">
-      <a href="#"> reset filters </a>
-    </div>
-    <div class="row filter-category">Filter by User</div>
-    <% _.each(users, function(user) { %>
-      <div class="row user filter" id="<%=user.login%>">
-        <div class="col-lg-4">
-          <img class= "img-responsive img-circle" src="<%= user.avatar_url %>" />
-        </div>
-        <div class="col-lg-8 vcenter">
-          <p><%= user.login %></p>
-        </div>
-      </div>
-    <% }); %>
-    <div class="row filter-category">Filter by Language</div>
-    <% _.each(languages, function(language) { %>
-      <div class="row language filter" id="<%=language%>">
-        <div class="col-lg-4">
-          <img class= "img-responsive img-rounded lang-logo" src="assets/small-<%=language%>.png" />
-        </div>
-        <div class="col-lg-8 vcenter">
-          <p><%= language %></p>
-        </div>
-      </div>
-    <% }); %>
+  <div class="panel panel-default">
+    <div class="panel-heading">Filter by Language</div>
+    <div class="panel-body languages"></div>
   </div>
+</div>

@@ -1,18 +1,19 @@
 <h1><%=gist.description%></h1>
+<% if (gist.files.hasOwnProperty("index.html")){ %>
 <iframe id="example" scrolling="no" marginheight="0" marginwidth="0" src=<%="http://bl.ocks.org/"+gist.owner.login+"/raw/"+gist.id%>></iframe>
+<% } %>
+<% if (gist.files.hasOwnProperty("output.png")) { %>
+<img class="img-responsive" src="<%=gist.files["output.png"].raw_url%>">
+<% } %>
 <div class="row">
   <% _.each(gist.files, function(file) { %>
     <% if (file.filename === "README.md") {%>
-      <div><%= new Showdown.converter().makeHtml(file.content)%></div>
-    <% } else if (!(file.type === "image/png" || file.type === "image/jpeg" || file.size > 25000)) { %>
+      <div class="readme"><%= new Showdown.converter().makeHtml(file.content)%></div>
+    <% } else if (!(file.type === "image/png" || file.type === "image/jpeg" || file.size > 25000 || file.filename[0] === "_")) { %>
       <h3>
         <%-file.filename %>
       </h3>
-      <pre>
-        <code>
-          <%-file.content%>
-        </code>
-      </pre>
+      <pre><code class=<%= file.language ? file.language.toLowerCase() : ""%>><%-file.content%></code></pre>
     <% } %>
   <% }); %>
 </div>
