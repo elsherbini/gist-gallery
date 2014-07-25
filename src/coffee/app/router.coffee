@@ -29,7 +29,7 @@ define [
       gistModel.url = "https://api.github.com/gists/#{gistId}"+addend
       gistModel.fetch({
         cache: true
-        expires: 24*60*60
+        expires: 60*60
 
         success: (model, response, options) =>
           return
@@ -45,7 +45,7 @@ define [
       usersCollection.fetch(
 
         cache: true
-        expires: 24*60*60
+        expires: 60*60
 
         success: (collection, response, options) =>
           @getGistsForUsers(usersCollection, orgName)
@@ -73,7 +73,7 @@ define [
           add: true
           merge: true
           remove: false
-          expires: 24*60*60
+          expires: 60*60
 
           url: gistsCollection.url
 

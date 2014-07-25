@@ -3,18 +3,25 @@
   <h2><%= org%>'s snippets</h2>
 </div>
 
-
-<div class="row col-lg-9 gistThumbs">
+<div class="row col-md-3 col-xs-12 col-lg-push-9">
+  <a class="invisible" id="resetFilters" href="#"><p class="text-center">reset filters <span class="glyphicon glyphicon-remove text"></span> </p></a>
+  <div class-"row">
+    <div class="col-md-12 col-xs-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Filter by User</div>
+        <div class="panel-body users"></div>
+      </div>
+    </div>
+    <div class="col-md-12 col-xs-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Filter by Language</div>
+        <div class="panel-body languages"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="row col-lg-3 ">
-  <a class="invisible" id="resetFilters" href="#"><p class="text-center"> reset filters </p></a>
-  <div class="panel panel-default">
-    <div class="panel-heading">Filter by User</div>
-    <div class="panel-body users"></div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Filter by Language</div>
-    <div class="panel-body languages"></div>
-  </div>
+<div class="row col-md-9 col-xs-12 col-lg-pull-3 gistThumbs">
 </div>
+
+

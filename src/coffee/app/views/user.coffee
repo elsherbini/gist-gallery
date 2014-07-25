@@ -21,9 +21,13 @@ define ['backbone','text!templates/user.html'], (Backbone, userTemplate) ->
       App.vent.trigger("clickedUser", @model.get("login"))
 
     checkYoSelf: ->
-      if @model.get("login") not in App.state.filters.users
-        @$el.addClass("faded")
-      if @model.get("login") in App.state.filters.users
+      if App.state.filters.users.length > 0
+        if @model.get("login") not in App.state.filters.users
+          @$el.addClass("faded")
+          @$el.find(".glyphicon").addClass("hide")
+        if @model.get("login") in App.state.filters.users
+          @$el.removeClass("faded")
+          @$el.find(".glyphicon").removeClass("hide")
+      if App.state.filters.users.length == 0
         @$el.removeClass("faded")
-      if App.state.filters.users  .length == 0
-        @$el.removeClass("faded")
+        @$el.find(".glyphicon").addClass("hide")

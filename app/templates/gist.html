@@ -1,10 +1,30 @@
 <div class="row">
+<div class="col-xs-6">
+<a href="#"> <span class="glyphicon glyphicon-chevron-left"></span> back to gallery</a>
+</div>
+<div class="col-xs-6 text-right">
+<a target="_blank" href="https://gist.github.com/<%=gist.owner.login%>/<%=gist.id%>"> view code on github <span class="glyphicon glyphicon-new-window"></span> </a>
+</div>
+</div>
+
+<div class="row">
   <h1><%=gist.description%></h1>
 </div>
 
+
 <% if (gist.files.hasOwnProperty("index.html")){ %>
+<div class="row">
+<div class="col-xs-12">
 <iframe id="example" scrolling="no" marginheight="0" marginwidth="0" src=<%="http://bl.ocks.org/"+gist.owner.login+"/raw/"+gist.id%>></iframe>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12 text-right">
+<a target="_blank" href="http://bl.ocks.org/<%=gist.owner.login%>/raw/<%=gist.id%>">full window on bl.ocks.org <span class="glyphicon glyphicon-new-window"></span></a>
+</div>
+</div>
 <% } %>
+
 
 <% if (gist.files.hasOwnProperty("output.png")) { %>
 <div class="row">

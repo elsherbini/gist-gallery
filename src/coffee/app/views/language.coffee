@@ -21,10 +21,14 @@ define ['backbone','text!templates/language.html'], (Backbone, languageTemplate)
       App.vent.trigger("clickedLanguage", @model.get("name"))
 
     checkYoSelf: ->
-      if @model.get("name") not in App.state.filters.languages
-        @$el.addClass("faded")
-      if @model.get("name") in App.state.filters.languages
-        @$el.removeClass("faded")
+      if App.state.filters.languages.length > 0
+        if @model.get("name") not in App.state.filters.languages
+          @$el.addClass("faded")
+          @$el.find(".glyphicon").addClass("hide")
+        if @model.get("name") in App.state.filters.languages
+          @$el.removeClass("faded")
+          @$el.find(".glyphicon").removeClass("hide")
       if App.state.filters.languages.length == 0
         @$el.removeClass("faded")
+        @$el.find(".glyphicon").addClass("hide")
 
