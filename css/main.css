@@ -1,0 +1,87 @@
+body,
+pre {
+  font-size: medium;
+  background-color: #FFFFFF;
+}
+pre,
+code,
+textarea {
+  font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+  line-height: normal;
+}
+pre {
+  margin: 2em 0 2em 0;
+}
+html {
+  font-size: 100%;
+}
+a.gist {
+  min-width: 20%;
+  min-height: 80px;
+  transition: background-position 750ms ease 0s;
+}
+a.gist:hover,
+a.gist:focus {
+  background-color: #eee;
+  background-position: 50% 100%;
+  text-decoration: none;
+}
+a.gist .description {
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
+}
+a.gist .description {
+  top: 0;
+  color: #000;
+  text-shadow: 1px 1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, -1px -1px 0 #ffffff;
+}
+a.gist:hover .description {
+  text-decoration: underline;
+}
+iframe {
+  border: 1px solid #DEDEDE;
+  height: 500px;
+  width: 100%;
+}
+.filter-category {
+  color: #959595;
+  border-bottom: solid #959595;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  top: 15px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 0px;
+}
+.filter {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.filter-text {
+  padding-top: 5px;
+}
+#resetFilters {
+  margin-left: 0px;
+}
+.vcenter {
+  display: inline;
+  vertical-align: middle;
+  float: none;
+}
+.vbottom {
+  display: inline;
+  vertical-align: bottom;
+  float: none;
+}
+.faded {
+  opacity: 0.45;
+}
+.readme {
+  margin: 10px;
+  font-size: large;
+}
