@@ -5,22 +5,24 @@ define [
   'app/models/gist'
   'app/views/gists'
   'app/views/gist'
-  'app/collections/users'], (Backbone, AppView, GistsCollection, GistModel, GistsView, GistView, UsersCollection) ->
+  'app/collections/users'
+  'app/views/about'], (Backbone, AppView, GistsCollection, GistModel, GistsView, GistView, UsersCollection, AboutView) ->
 
   class Router extends Backbone.Router
 
     clientId = "REDACTED"
     clientSecret = "REDACTED"
 
-    addend = ""#"?client_id=#{clientId}&client_secret=#{clientSecret}"
+
+    addend = ""#?client_id=#{clientId}&client_secret=#{clientSecret}"
 
     initialize: ->
-      AppView.render();
+      AppView.render()
       Backbone.history.start()
 
     routes:
       '': 'rootRequested'
-      'orgs/:orgName': 'orgsGistsRequested'
+      'about(/)': 'aboutRequested'
       ':gistId(/)(:gistDescription)': 'singleGistRequested'
 
     singleGistRequested: (gistId)->
@@ -83,6 +85,9 @@ define [
           error: (collection, response, options) ->
             console.log "error:", response
         })
+
+    aboutRequested: ->
+      new AboutView()
 
     rootRequested: ->
      #@singleGistRequested("d7bf3bd67d00ed79695b")

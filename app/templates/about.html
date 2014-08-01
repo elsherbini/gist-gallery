@@ -1,0 +1,29 @@
+<div class="row">
+  <h3> What is this site? </h3>
+  <p> This is a site for sharing code examples. It leverages Github's Gist API. It is intended to be hosted by organizations who want to share code examples both internally and with the public.</p>
+</div>
+<div class="row">
+  <h3> How can I get my example on this site? </h3>
+  <p> First, you must be a member of the <a href="https://github.com/<%=App.state.org%>" target="_blank"><%=App.state.org%> organization</a> on Github. If you are a member, simply make a gist at <a href="http://gist.github.com" target="_blank">gist.github.com</a>. There are some special files that should be included to make your example awesome:
+    <ul>
+      <li>Your gist must have a file named "_include" in order to appear on the site.</li>
+      <li>The information about the gist should be in a "README.md" file. </li>
+      <li>To have a thumbnail on the gallery page, include a "thumbnail.png" file. </li>
+      <li>If your example is a webpage, name the html file "index.html", and it will be rendered in an iframe on the example's page. </li>
+      <li>If your example has some other graphical output, include an "output.png" file to go on the example page.</li>
+    </ul>
+  </p>
+</div>
+<div class="row">
+  <h3> I'm not a part of the <%=App.state.org%>, but I want this for my organization!</h3>
+  <p>No problem. This app is completely open source, and the code is available on Github at <a href="https://github.com/elsherbini/gist-gallery" target="_blank"> https://github.com/elsherbini/gist-gallery.</a> Information about how to set this up for any public Github organization can be found in the readme of that repository. The included build script generates one HTML file, one CSS, and three JavaScript files, no server-side logic required.</p>
+</div>
+<div class="row">
+  <h3> Why did you choose to use Github for code hosting?</h3>
+  <p>Github is quickly becoming the most popular and best featured solution for hosting collaborative coding projects. They recently made huge steps to making it the best place for scientific projects in particular by assigning a DOI to each repository so they can be cited directly, and by giving academic research groups features that normally cost money <a href="https://github.com/blog/1840-improving-github-for-science" target="_blank">(read more on their blog here)</a>.</p>
+</div>
+<div class="row">
+  <h3> How did you come up with such an awesome idea?</h3>
+  <p>This site is inspired by <a href="http://bl.ocks.org" target="_blank">bl.ocks.org</a> by the incredible Mike Bostock, creator of the d3 data visualization library. I wanted a version of bl.ocks.org that didn't require server logic, and that allowed you to display examples at the organization level rather than just the user level. Also I wanted support for examples using languages other than JavaScript. All of those ideas were realized here, but wouldn't have been possible without Mike Bostock's amazing work as a guide.</p>
+</div>
+
