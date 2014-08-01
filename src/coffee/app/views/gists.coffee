@@ -39,6 +39,7 @@ define [
       @$el.find(".gistThumbs").append gistsContainer
       @$el.find(".users").append usersContainer
       @$el.find(".languages").append languagesContainer
+      App.vent.trigger("stateChange")
 
       return this
 
